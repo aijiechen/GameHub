@@ -7,3 +7,11 @@ Repo for CTP Project by
 <li>Muhammad Rehman</li>
 <li>Jefferson Wong</li>
 </ul>
+
+How to Install the Database
+<ul>
+<li>run this</li>
+<li>run that</li>
+<li>make user</li>
+<li>make password</li>
+</ul>
