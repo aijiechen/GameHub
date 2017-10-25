@@ -15,4 +15,4 @@ How to Install the Database
 <li>make user</li>
 <li>make password</li>
 </ul>
-[]do this
+
