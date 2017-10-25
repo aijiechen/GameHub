@@ -9,9 +9,25 @@ Repo for CTP Project by
 </ul>
 
 How to Install the Database
+
+Run the following: 
 <ul>
-<li>run this</li>
-<li>run that</li>
-<li>make user</li>
-<li>make password</li>
+<li> sudo apt-get update</li>
+<li> sudo apt-get install -y postgresql-9.5 postgresql-server-dev-9.5</li>
 </ul>
+
+Create a Database: 
+<ul>
+<li> createuser -P -s -e db_username</li>
+</ul>
+
+Create a User: 
+<ul>
+<li> createuser -P -s -e db_username</li>
+</ul>
+
+Create a Database: 
+<ul>
+<li> createdb -h localhost -U db_username MYAPPNAME_development</li>
+</ul>
+
