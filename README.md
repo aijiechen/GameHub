@@ -1,31 +1,31 @@
 # MiniGame-Network
 
-Repo for CTP Project by 
-<ul>
-<li>Aijie Chen</li>
-<li>Ahmed Elsaeyed</li>
-<li>Muhammad Rehman</li>
-<li>Jefferson Wong</li>
-</ul>
+### Repo for CTP Project by 
+
+* Aijie Chen
+* Ahmed Elsaeyed
+* Muhammad Rehman
+* Jefferson Wong
+
 
 How to Install the Database
 
-Run the following: 
-<ul>
-<li> sudo apt-get update</li>
-<li> sudo apt-get install -y postgresql-9.5 postgresql-server-dev-9.5</li>
-</ul>
+1.Run the following: 
 
-Create a User: 
-<ul>
-<li> createuser -P -s -e db_username</li>
-</ul>
+  1. sudo apt-get update
+  1. sudo apt-get install -y postgresql-9.5 postgresql-server-dev-9.5
 
 
+1. Create a User: 
 
-Create a Database: 
-<ul>
-<li> createdb -h localhost -U db_username MYAPPNAME_development</li>
-</ul>
+  1. createuser -P -s -e db_username
+
+
+
+
+1. Create a Database: 
+
+  1. createdb -h localhost -U db_username MYAPPNAME_development
+
 
 
