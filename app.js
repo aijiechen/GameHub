@@ -22,7 +22,12 @@ app.engine('handlebars', handlebars({
   layoutsDir: './views/layouts',
   defaultLayout: 'main',
 }));
+
+app.engine('jsx', require('express-react-views').createEngine());
+
 app.set('view engine', 'handlebars');
+app.set('view engine', 'jsx');
+
 app.set('views', `${__dirname}/views/`);
 
 // Load Controller
