@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 router.get('/', (req, res) => {
-  res.render('profile', { randomPerson: req.user })
+  res.json(req.user);
 });
 
 module.exports = router;
