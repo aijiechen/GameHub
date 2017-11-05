@@ -31,7 +31,9 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  if(!req.body.firstName || !req.body.password 
+
+  /*if(!req.body.firstName || !req.body.password 
+
     || !req.body.lastName || !req.body.email){
       // res.status("400");
       // res.send("Invalid details!");
@@ -40,7 +42,9 @@ router.post('/', (req, res) => {
   else if(!passwordCheck(req.body.password)){
     res.render('signup');
   }
-  else {
+
+  else {*/
+
       Users.create({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
@@ -53,7 +57,8 @@ router.post('/', (req, res) => {
     }).catch(() => {
       res.render('signup');
     });
-  }
+
+
 
 });
 
