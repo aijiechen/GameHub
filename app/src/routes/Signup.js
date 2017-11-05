@@ -26,15 +26,49 @@ class Signup extends React.Component{
 	};
 
 
+	validate = () => {
+		let isError = false;
+		const errors = {
+			usernameError: '',
+			emailError: '',
+
+		};
+		if (this.state.username.length < 5){
+			isError = true;
+			errors.usernameError = "Username needs to be atleast 5 characters";
+
+		}
+
+		if (this.state.email.indexOf('@') === -1){
+			isError = true;
+			errors.emailError = "Invalid Email";
+		}
+
+		if (this.state.password.length < 5 && )
+
+
+			this.setState({
+				...this.state,
+				...errors,
+		});
+		return isError;
+	};
+
+
 	onSubmit = (e)=>{
+		//Precent the default action from occuring
 		e.preventDefault();
-		this.setState({
-			firstName: '',
-			lastName: '',
-			username: '',
-			email: '',
-			password: '',
-		})
+
+		const err = this.validate();
+
+		if(!err) {
+			//Clear the form
+			this.setState({
+				emailError: '',
+				usernameError: '',
+				password: '',
+			})
+		};
 
 	}
 	render(){
