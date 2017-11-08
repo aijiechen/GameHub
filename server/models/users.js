@@ -25,5 +25,11 @@ module.exports = (sequelize, DataTypes) => {
       user.password = hashedPassword;
     })
   );
+  Users.associate = (models) => {
+  models.Users.hasMany(models.Friends);
+}
   return Users;
 };
+
+
+
