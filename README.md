@@ -21,7 +21,9 @@
 
 3. Create a Database: 
 
-   * `createdb -h localhost -U db_username MYAPPNAME_development`
+
+   * `createdb -h localhost -U db_username gamehub_development`
+
 
 ### Setting up the app
 

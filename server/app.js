@@ -27,7 +27,7 @@ app.set('views', `${__dirname}/views/`);
 
 // Load Controller
 const controllers = require('./controllers');
-app.use(controllers);
+app.use('/api',controllers);
 
 // Load Models
 const models = require('./models');
