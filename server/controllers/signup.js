@@ -48,7 +48,8 @@ router.post('/', (req, res) => {
       password: req.body.password,
     }).then((user) => {
       req.login(user, () =>
-        res.redirect('/profile')
+        //res.redirect('/profile')
+        res.json(user)
       );
     }).catch(() => {
       res.render('signup');
