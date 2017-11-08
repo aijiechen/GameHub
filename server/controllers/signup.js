@@ -43,8 +43,8 @@ router.post('/', (req, res) => {
     );
   }).catch(() => {
     res.render('signup');
-  });
 
+  });
 
 });
 
