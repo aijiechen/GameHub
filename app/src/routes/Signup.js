@@ -34,7 +34,21 @@ class Signup extends React.Component{
 			emailError: '',
 			passwordError: '',
 			passwordVerificationError: '',
+			firstNameError: '',
+			lastNameError: '',
 		};
+
+		if( this.state.firstName.length < 1)
+		{
+			isError = true;
+			errors.firstNameError = "Enter first name"
+		}
+
+		if( this.state.lastName.length < 1)
+		{
+			isError = true;
+			errors.lastNameError = "Enter last name"
+		}
 
 		if (this.state.email.indexOf('@') === -1)
 		{
