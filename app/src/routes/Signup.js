@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -10,8 +11,6 @@ class Signup extends React.Component{
 			firstNameError: '',
 			lastName: '',
 			lastNameError: '',
-			username: '',
-			usernameError: '',
 			email: '',
 			emailError: '',
 			password: '',
@@ -36,12 +35,6 @@ class Signup extends React.Component{
 			passwordError: '',
 			passwordVerificationError: '',
 		};
-		if (this.state.username.length < 5)
-		{
-			isError = true;
-			errors.usernameError = "Username needs to be atleast 5 characters";
-
-		}
 
 		if (this.state.email.indexOf('@') === -1)
 		{
@@ -62,9 +55,9 @@ class Signup extends React.Component{
 			errors.passwordVerificationError = "Passwords don't match"
 		}
 
-			this.setState({
-				...this.state,
-				...errors,
+		this.setState({
+			...this.state,
+			...errors,
 		});
 		return isError;
 	};
@@ -102,11 +95,23 @@ class Signup extends React.Component{
 			})
 		};
 
+		axios.post('/api/signup',
+			{firstName: this.state.firstName,
+				lastName: this.state.lastName,
+				email: this.state.email,
+				password: this.state.password})
+		.then((result => {
+					console.log(result)
+				}))
+		
+		
+		
+
 	}
 	render(){
 		return(
 			<MuiThemeProvider>
-			<form>
+			<form method = "post" action = "/api/signup">
 				<TextField 
 				name = "firstName"
 				floatingLabelText = "First name" 
@@ -123,16 +128,6 @@ class Signup extends React.Component{
 				value = {this.state.lastName} 
 				onChange = {e => this.change(e)}
 				errorText = {this.state.lastNameError}
-				floatingLabelFixed
-				/>
-
-				<br />
-				<TextField 
-				name = "username"
-				floatingLabelText = "Username" 
-				value = {this.state.username} 
-				onChange = {e => this.change(e)}
-				errorText = {this.state.usernameError}
 				floatingLabelFixed
 				/>
 
