@@ -32,32 +32,18 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
 
-  /*if(!req.body.firstName || !req.body.password 
-
-    || !req.body.lastName || !req.body.email){
-      // res.status("400");
-      // res.send("Invalid details!");
-      res.render('signup');
-   }
-  else if(!passwordCheck(req.body.password)){
+  Users.create({
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email,
+    password: req.body.password,
+  }).then((user) => {
+    req.login(user, () =>
+      res.redirect('/profile')
+    );
+  }).catch(() => {
     res.render('signup');
-  }
-
-  else {*/
-
-      Users.create({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      password: req.body.password,
-    }).then((user) => {
-      req.login(user, () =>
-        res.redirect('/profile')
-      );
-    }).catch(() => {
-      res.render('signup');
-    });
-
+  });
 
 
 });
