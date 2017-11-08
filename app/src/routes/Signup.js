@@ -3,6 +3,9 @@ import axios from 'axios';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { Route, Redirect } from 'react-router-dom';
+
+
 class Signup extends React.Component{
 
 	
@@ -73,7 +76,7 @@ class Signup extends React.Component{
 				email: this.state.email,
 				password: this.state.password})
 		.then((result => {
-					console.log(result)
+					<Redirect to = "/profile" />
 				}))
 		
 		
