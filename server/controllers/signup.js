@@ -42,7 +42,8 @@ router.post('/', (req, res) => {
       res.json(user)
     );
   }).catch(() => {
-    res.render('signup');
+    //Add 404 error
+    res.json();
 
   });
 
