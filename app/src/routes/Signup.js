@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -10,12 +11,12 @@ class Signup extends React.Component{
 			firstNameError: '',
 			lastName: '',
 			lastNameError: '',
-			username: '',
-			usernameError: '',
 			email: '',
 			emailError: '',
 			password: '',
 			passwordError: '',
+			passwordVerification: '',
+			passwordVerificationError: '',
 		}
 	
 	change = e => {
@@ -31,29 +32,67 @@ class Signup extends React.Component{
 		const errors = {
 			usernameError: '',
 			emailError: '',
-
+			passwordError: '',
+			passwordVerificationError: '',
+			firstNameError: '',
+			lastNameError: '',
 		};
-		if (this.state.username.length < 5){
-			isError = true;
-			errors.usernameError = "Username needs to be atleast 5 characters";
 
+		if( this.state.firstName.length < 1)
+		{
+			isError = true;
+			errors.firstNameError = "Enter first name"
 		}
 
-		if (this.state.email.indexOf('@') === -1){
+		if( this.state.lastName.length < 1)
+		{
+			isError = true;
+			errors.lastNameError = "Enter last name"
+		}
+
+		if (this.state.email.indexOf('@') === -1)
+		{
 			isError = true;
 			errors.emailError = "Invalid Email";
 		}
 
-		if (this.state.password.length < 5 && )
+		if (this.state.password.length < 8 || this.state.password === this.state.password.toLowerCase()
+			|| this.state.password === this.state.password.toUpperCase() /*|| !isAlphaNumeric(this.state.password)*/)
+		{
+			isError = true;
+			errors.passwordError = "Password should be more than 8 characters, contain uppercase, lowercase letters and numbers"
+		}
 
+		if(this.state.password != this.state.passwordVerification)
+		{
+			isError = true;
+			errors.passwordVerificationError = "Passwords don't match"
+		}
 
-			this.setState({
-				...this.state,
-				...errors,
+		this.setState({
+			...this.state,
+			...errors,
 		});
 		return isError;
 	};
 
+
+	// isAlphaNumeric = (str) => 
+	// {
+	// 	var code, i, len;
+
+	// 	for (i = 0, len = str.length; i < len; i++) 
+	// 	{
+	// 	  code = str.charCodeAt(i);
+	// 	  if (!(code > 47 && code < 58) && // numeric (0-9)
+	// 	     !(code > 64 && code < 91) && // upper alpha (A-Z)
+	// 	     !(code > 96 && code < 123))  // lower alpha (a-z) 
+	// 	  {
+	// 	      return false;
+	// 	  }
+	// 	}
+	// 	  return true;
+	// };
 
 	onSubmit = (e)=>{
 		//Precent the default action from occuring
@@ -70,11 +109,23 @@ class Signup extends React.Component{
 			})
 		};
 
+		axios.post('/api/signup',
+			{firstName: this.state.firstName,
+				lastName: this.state.lastName,
+				email: this.state.email,
+				password: this.state.password})
+		.then((result => {
+					console.log(result)
+				}))
+		
+		
+		
+
 	}
 	render(){
 		return(
 			<MuiThemeProvider>
-			<form>
+			<form method = "post" action = "/api/signup">
 				<TextField 
 				name = "firstName"
 				floatingLabelText = "First name" 
@@ -96,18 +147,8 @@ class Signup extends React.Component{
 
 				<br />
 				<TextField 
-				name = "username"
-				floatingLabelText = "username" 
-				value = {this.state.username} 
-				onChange = {e => this.change(e)}
-				errorText = {this.state.usernameError}
-				floatingLabelFixed
-				/>
-
-				<br />
-				<TextField 
 				name = "email"
-				floatingLabelText = "email" 
+				floatingLabelText = "E-mail" 
 				value = {this.state.email} 
 				onChange = {e => this.change(e)}
 				errorText = {this.state.emailError}
@@ -118,7 +159,19 @@ class Signup extends React.Component{
 				<TextField 
 				name = "password"
 				type = "password"
-				floatingLabelText = "password" 
+				floatingLabelText = "Password" 
+				value = {this.state.password} 
+				onChange = {e => this.change(e)}
+				errorText = {this.state.passwordError}
+				floatingLabelFixed
+				/>
+				<br />
+
+				<br />
+				<TextField 
+				name = "passwordVerification"
+				type = "passwordVerification"
+				floatingLabelText = "Re-Type Password" 
 				value = {this.state.password} 
 				onChange = {e => this.change(e)}
 				errorText = {this.state.passwordError}
