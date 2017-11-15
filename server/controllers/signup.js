@@ -31,7 +31,6 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-
   Users.create({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
@@ -39,10 +38,14 @@ router.post('/', (req, res) => {
     password: req.body.password,
   }).then((user) => {
     req.login(user, () =>
-      res.redirect('/profile')
+      res.json(user)
     );
   }).catch(() => {
-    res.render('signup');
+
+    res.json({message: "Error",
+      status: 0})
+  });
+
 
   });
 
