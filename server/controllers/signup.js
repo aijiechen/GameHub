@@ -31,7 +31,6 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-
   Users.create({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
@@ -42,8 +41,11 @@ router.post('/', (req, res) => {
       res.json(user)
     );
   }).catch(() => {
-    //Add 404 error
-    res.json();
+
+    res.json({message: "Error",
+      status: 0})
+  });
+
 
   });
 

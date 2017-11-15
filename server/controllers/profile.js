@@ -7,9 +7,12 @@ router.get('/:id', (req, res) => {
 	Users.findById(id) 
 	.then(user => {
 		res.json(user)})
-
-
 });
+
+router.get('/', (req, res) =>{
+	res.json({key: "hie"})
+});
+
 
 
 

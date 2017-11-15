@@ -110,7 +110,9 @@ class Signup extends React.Component{
 				emailError: '',
 				usernameError: '',
 				password: '',
+				passwordVerification: '',
 			})
+
 			axios.post('/api/signup',
 			{firstName: this.state.firstName,
 				lastName: this.state.lastName,
@@ -120,6 +122,7 @@ class Signup extends React.Component{
 					this.setState({redirect: true})
 				);
 		}				
+
 
 	}
 	render(){
@@ -176,11 +179,11 @@ class Signup extends React.Component{
 				<br />
 				<TextField 
 				name = "passwordVerification"
-				type = "passwordVerification"
+				type = "password"
 				floatingLabelText = "Re-Type Password" 
-				value = {this.state.password} 
+				value = {this.state.passwordVerification} 
 				onChange = {e => this.change(e)}
-				errorText = {this.state.passwordError}
+				errorText = {this.state.passwordVerificationError}
 				floatingLabelFixed
 				/>
 				<br />
