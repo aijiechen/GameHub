@@ -9,6 +9,7 @@ class Login extends React.Component{
 	state = {
 			email: '',
 			password: '',
+			passwordError: '',
 			redirectHome: false,
 			redirectSignup:false,
 			}
@@ -53,9 +54,22 @@ class Login extends React.Component{
 			axios.post('/api/login',
 			{
 				email: this.state.email,
-				password: this.state.password})
-			.then(() => 
-					this.setState({redirectHome: true})
+				password: this.state.password
+			})
+			.then((response) =>
+					{
+						if(!response.data){
+							this.setState({
+								passwordError:"Wrong Password",
+							})
+						}
+						else{
+							this.setState({
+								redirectHome:true,
+							})
+						}
+					} 
+					
 				);
 		};
 
