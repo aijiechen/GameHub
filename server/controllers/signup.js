@@ -41,10 +41,17 @@ router.post('/', (req, res) => {
       res.json(user)
     );
   }).catch(() => {
+
     res.json({message: "Error",
       status: 0})
   });
 
+<<<<<<< HEAD
+=======
+
+  });
+
+>>>>>>> 5a43963f1dcd01e9cf0144c1dd137ab08966d645
 });
 
 module.exports = router;

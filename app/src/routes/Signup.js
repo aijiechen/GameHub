@@ -20,6 +20,7 @@ class Signup extends React.Component{
 			passwordError: '',
 			passwordVerification: '',
 			passwordVerificationError: '',
+			redirect: false,
 		}
 	
 	change = e => {
@@ -66,11 +67,11 @@ class Signup extends React.Component{
 			errors.passwordError = "Password should be more than 8 characters, contain uppercase, lowercase letters and numbers"
 		}
 
-		if(this.state.password != this.state.passwordVerification)
+		/*if(this.state.password !== this.state.passwordVerification)
 		{
 			isError = true;
 			errors.passwordVerificationError = "Passwords don't match"
-		}
+		}*/
 
 		this.setState({
 			...this.state,
@@ -111,24 +112,26 @@ class Signup extends React.Component{
 				password: '',
 				passwordVerification: '',
 			})
-		};
 
-		axios.post('/api/signup',
-			{
-				firstName: this.state.firstName,
+			axios.post('/api/signup',
+			{firstName: this.state.firstName,
 				lastName: this.state.lastName,
 				email: this.state.email,
-				password: this.state.password
-			})
-		.then((result => {
-					<Redirect to = "/profile" />
-				}))
-		
-		
-		
+				password: this.state.password})
+			.then(() => 
+					this.setState({redirect: true})
+				);
+		}				
+
 
 	}
 	render(){
+
+		const { redirect } = this.state;
+
+		if (redirect ) {
+			return <Redirect to = "/home"/>;
+		}
 		return(
 			<MuiThemeProvider>
 			<form method = "post" action = "/api/signup">
