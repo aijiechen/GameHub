@@ -1,6 +1,11 @@
 const router = require('express').Router();
 const models = require('../models');
 const Users = models.Users;
+// const Friends = models.Friends;
+
+// console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$');
+//   console.log(Friends.findAll());
+//   return;
 
 //npm install stringLength
 const stringLength = require('string-length');
@@ -43,8 +48,6 @@ router.post('/', (req, res) => {
   }).catch(() => {
     res.json({message: "Error",
       status: 0})
-  });
-
   });
 
 });
