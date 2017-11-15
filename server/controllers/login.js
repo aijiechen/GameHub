@@ -2,12 +2,12 @@ const passport = require('../middlewares/authentication');
 const router = require('express').Router();
 
 router.get('/', (req, res) => {
-  res.json('login');
+  res.render('login');
 });
 
 router.post('/', (req, res) => {
   passport.authenticate('local', {
-    successRedirect: '/',
+    successRedirect: '/api/home',
     failureRedirect: '/api/login',
   })(req, res);
 });

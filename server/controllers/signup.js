@@ -41,9 +41,11 @@ router.post('/', (req, res) => {
       res.json(user)
     );
   }).catch(() => {
+
     res.json({message: "Error",
       status: 0})
   });
+
 
   });
 
