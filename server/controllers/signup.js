@@ -45,8 +45,6 @@ router.post('/', (req, res) => {
       status: 0})
   });
 
-  });
-
 });
 
 module.exports = router;
