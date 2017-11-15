@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 class Home extends React.Component{
 
@@ -10,10 +11,10 @@ class Home extends React.Component{
 	}
 
 	componentDidMount(props){
-		fetch('/api/home')
-		.then(data => data.json())
-		.then(data => {
-			console.log(data);	
+		axios.get('/api/home')
+		.then(body => {
+			console.log(body);	
+			
 		}) 
 	
 	}
@@ -27,8 +28,7 @@ class Home extends React.Component{
 	
 
 	</div>
-	);
-	}
+	)}
 
 
 }
