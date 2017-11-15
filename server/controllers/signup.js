@@ -46,12 +46,7 @@ router.post('/', (req, res) => {
       status: 0})
   });
 
-<<<<<<< HEAD
-=======
 
-  });
-
->>>>>>> 5a43963f1dcd01e9cf0144c1dd137ab08966d645
 });
 
 module.exports = router;
