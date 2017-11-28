@@ -1,13 +1,17 @@
 import React from 'react';
+import axios from 'axios';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
+import {Route, Redirect} from 'react-router-dom';
 class Login extends React.Component{
 
 	state = {
-			username: '',
+			email: '',
 			password: '',
+			passwordError: '',
+			redirectHome: false,
+			redirectSignup:false,
 			}
 	
 	change = e => {
@@ -30,7 +34,11 @@ class Login extends React.Component{
 		});
 		return isError;
 	};
+	onRegister = (e) =>{
+		e.preventDefault();
 
+		this.setState({redirectSignup:true});
+	};
 	onSubmit = (e)=>{
 		//Precent the default action from occuring
 		e.preventDefault();
@@ -40,24 +48,58 @@ class Login extends React.Component{
 		if(!err) {
 			//Clear the form
 			this.setState({
-				username: '',
+				email: '',
 				password: '',
 			})
+			axios.post('/api/login',
+			{
+				email: this.state.email,
+				password: this.state.password
+			})
+			.then((response) =>
+					{
+						if(!response.data){
+							this.setState({
+								passwordError:"Wrong Password",
+							})
+						}
+						else{
+							this.setState({
+								redirectHome:true,
+							})
+						}
+					} 
+					
+				);
 		};
 
-	}
+	};
 
 	render(){
+		const {redirectSignup } = this.state;
+
+		if (redirectSignup){
+					return <Redirect to = "/signup"/>
+				}
+
+		const{redirectHome } = this.state;
+
+		if(redirectHome){
+			return <Redirect to = "/home"/>
+		}
 		return(
+
 			<MuiThemeProvider>
 			<form>	
 
+
+
 				<TextField 
-				name = "username"
-				floatingLabelText = "Username" 
-				value = {this.state.username} 
+				name = "email"
+				floatingLabelText = "email" 
+				value = {this.state.email} 
 				onChange = {e => this.change(e)}
-				errorText = {this.state.usernameError}
+				errorText = {this.state.emailError}
 				floatingLabelFixed
 				/>
 				<br />
@@ -73,7 +115,10 @@ class Login extends React.Component{
 				/>
 				<br />
 
+				
+				
 				<RaisedButton label = "Submit" onClick = {e => this.onSubmit(e)} primary />
+				<RaisedButton label = "Signup" onClick = {e => this.onRegister(e)} primary />
 			</form>
 			</MuiThemeProvider>
 			);

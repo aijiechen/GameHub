@@ -13,7 +13,11 @@ class Home extends React.Component{
 	componentDidMount(props){
 		axios.get('/api/home')
 		.then(body => {
-			console.log(body);	
+			this.setState({
+				firstName: body.data.firstName,
+				lastName: body.data.lastName,
+				email: body.data.email,
+			})
 			
 		}) 
 	
@@ -24,7 +28,8 @@ class Home extends React.Component{
 	render(){
 		return(
 	<div> <h1>Welcome home</h1>
-	<p> Your name is TestName;</p>
+	<p> Your name is {this.state.firstName} {this.state.lastName};</p>
+	<p> Your email is {this.state.email} </p>
 	
 
 	</div>
