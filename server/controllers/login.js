@@ -6,9 +6,10 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  passport.authenticate('local', {
-    successRedirect: '/api/home',
-    failureRedirect: '/api/login',
+  passport.authenticate('local', function (err, account) {
+    req.logIn(account, function() {
+        res.status(err ? 500 : 200).send(err ? err : account);
+    });
   })(req, res);
 });
 
