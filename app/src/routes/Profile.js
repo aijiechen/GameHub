@@ -22,6 +22,8 @@ class Profile extends React.Component{
 			})
 			
 		}) 
+
+		
 	}
 
 
