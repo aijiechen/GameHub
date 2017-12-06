@@ -6,6 +6,8 @@ import Home from './Home';
 import Signup from './Signup';
 import Login from './Login';
 import Profile from './Profile';
+import TicTacToe from './TicTacToe';
+import globalChat from './globalChat';
 
 export default() => (
 	<BrowserRouter>
@@ -15,6 +17,8 @@ export default() => (
 			<Route path = "/signup" exact component = {Signup} />
 			<Route path = "/login" exact component = {Login} />
 			<Route path = "/profile/:id" exact component = {Profile} />
+			<Route path = "/tictactoe" exact component = {TicTacToe} />
+			<Route path = "/globalChat" exact component = {globalChat} />
 		</Switch>
 	</BrowserRouter>
 );
