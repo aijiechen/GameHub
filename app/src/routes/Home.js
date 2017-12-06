@@ -2,11 +2,13 @@ import React from 'react';
 import axios from 'axios';
 import './css/freelancer.css';
 
+
 import './img/portfolio/pingpong.png';
 import './img/portfolio/tic.png';
 import profileimg from './img/profile.png';
 import tictactoeimg from './img/portfolio/tic.png';
 import pingpongimg from './img/portfolio/pingpong.png';
+
 class Home extends React.Component{
 
 	state = {
@@ -14,6 +16,8 @@ class Home extends React.Component{
 		firstName: '',
 		lastName: '',
 		email: '',
+		games: [],
+		gameId: '',
 	}
 
 	componentDidMount(props){
@@ -26,15 +30,27 @@ class Home extends React.Component{
 			})
 			
 		}) 
-	
-	}
 
+		axios.get('/api/games')
+		.then(body => {
+			const games = body.data.map(game=>{
+				return <Game data={game} key = {game.title} />;
+			});
+
+			this.setState({
+				games: games,
+			});
+		});
+	}
+	
 	
 
 	render(){
 		return(
+
 	<div>
 	<Homepage />
+
 
 	</div>
 	)}
