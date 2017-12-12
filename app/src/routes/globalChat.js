@@ -41,7 +41,7 @@ class globalChat extends React.Component{
 		return(
 			<div className="container">
                 <div className="row">
-                    <div className="col-8">
+                    <div className="col-5">
                         <div className="card">
                             <div className="card-body">
                                 <div className="card-title">Global Chat</div>

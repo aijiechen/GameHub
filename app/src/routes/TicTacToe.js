@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import '../css/TicTacToe.css'
-import io from 'socket.io-client';
+//import io from 'socket.io-client';
+
+import GlobalChat from './globalChat';
 
 /*
  * Changes from original tutorial
@@ -21,6 +23,13 @@ function Square(props) {
   );
 }
 
+function chatBox(){
+  return(
+    <div>
+    <globalChat />
+    </div>)
+}
+
 class Board extends Component {
   
   
@@ -32,6 +41,7 @@ class Board extends Component {
   render() {
     return (
       <div>
+
         <div className="board-row">
           {this.renderSquare(0)}
           {this.renderSquare(1)}
@@ -99,6 +109,7 @@ class Game extends Component {
         'Move #' + move :
         'Game start';
       return (
+
         <li key = {move}>
           <a href="#" onClick={() => this.jumpTo(move)}>{desc}</a>
         </li>
@@ -114,14 +125,17 @@ class Game extends Component {
     return (
       <div className="game">
         <div className="game-board">
+
           <Board 
                 squares={current.squares}
                 onClick={(i) => this.handleClick(i)} />
         </div>
+
         <div className="game-info">
           <div>{status}</div>
           <ol>{moves}</ol>
         </div>
+        <GlobalChat />
       </div>
     );
   }

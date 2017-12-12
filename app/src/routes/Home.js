@@ -31,16 +31,16 @@ class Home extends React.Component{
 			
 		}) 
 
-		axios.get('/api/games')
-		.then(body => {
-			const games = body.data.map(game=>{
-				return <Game data={game} key = {game.title} />;
-			});
+		// axios.get('/api/games')
+		// .then(body => {
+		// 	const games = body.data.map(game=>{
+		// 		return <Game data={game} key = {game.title} />;
+		// 	});
 
-			this.setState({
-				games: games,
-			});
-		});
+		// 	this.setState({
+		// 		games: games,
+		// 	});
+		// });
 	}
 	
 	
