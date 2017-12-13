@@ -113,13 +113,15 @@ class Homepage extends React.Component{
             <hr className="star-primary" />
             <div className="row">
               <div className="col-sm-6 portfolio-item">
-                <a className="portfolio-link" href="#portfolioModal1" data-toggle="modal">
+                <a className="nav-link js-scroll-trigger" href="/tictactoe">
                   <div className="caption">
                     <div className="caption-content">
                       <i className="fa fa-search-plus fa-3x" />
                     </div>
                   </div>
+
                   <img className="img-fluid" src={tictactoeimg} alt style={{width: 480, height: 480}} />
+                  
                 </a>
               </div>
               <div className="col-sm-6 portfolio-item">
