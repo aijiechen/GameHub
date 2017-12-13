@@ -34,7 +34,7 @@ class Home extends React.Component{
 		axios.get('/api/games')
 		.then(body => {
 			const games = body.data.map(game=>{
-				return <Game data={game} key = {game.title} />;
+				return <game data={game} key = {game.title} />;
 			});
 
 			this.setState({
@@ -135,77 +135,7 @@ class Homepage extends React.Component{
             </div>
           </div>
         </section>  
-        {/* login Section */}
-        <section id="about">
-          <div className="container">
-            <h2 className="text-center">Login</h2>
-            <hr className="star-primary" />
-            <div className="row">
-              <div className="col-lg-8 mx-auto">
-                <form name="sentMessage" id="contactForm" noValidate>
-                  <div className="control-group">
-                    <div className="form-group floating-label-form-group controls">
-                      <label>Username</label>
-                      <input className="form-control" id="name" type="text" placeholder="UserName" required data-validation-required-message="Please enter your name." />
-                      <p className="help-block text-danger" />
-                    </div>
-                  </div>
-                  <div className="control-group">
-                    <div className="form-group floating-label-form-group controls">
-                      <label>PassWord</label>
-                      <input className="form-control" id="email" type="email" placeholder="Passworld" required data-validation-required-message="Please enter your email address." />
-                      <p className="help-block text-danger" />
-                    </div>
-                  </div>
-                  <br />
-                  <div id="success" />
-                  <div className="form-group">
-                    <button type="submit" className="btn btn-success btn-lg" id="sendMessageButton">login</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </section>
-        {/* Sign up Section */}
-        <section id="contact">
-          <div className="container">
-            <h2 className="text-center">Sign up</h2>
-            <hr className="star-primary" />
-            <div className="row">
-              <div className="col-lg-8 mx-auto">
-                <form name="sentMessage" id="contactForm" noValidate>
-                  <div className="control-group">
-                    <div className="form-group floating-label-form-group controls">
-                      <label>Username</label>
-                      <input className="form-control" id="name" type="text" placeholder="UserName" required data-validation-required-message="Please enter your Username." />
-                      <p className="help-block text-danger" />
-                    </div>
-                  </div>
-                  <div className="control-group">
-                    <div className="form-group floating-label-form-group controls">
-                      <label>Passworld</label>
-                      <input className="form-control" id="email" type="email" placeholder="Passworld" required data-validation-required-message="Please enter your email address." />
-                      <p className="help-block text-danger" />
-                    </div>
-                  </div>
-                  <div className="control-group">
-                    <div className="form-group floating-label-form-group controls">
-                      <label>Re-password</label>
-                      <input className="form-control" id="phone" type="tel" placeholder="Re-password" required data-validation-required-message="Please re-enter your Passworld." />
-                      <p className="help-block text-danger" />
-                    </div>
-                  </div>
-                  <br />
-                  <div id="success" />
-                  <div className="form-group">
-                    <button type="submit" className="btn btn-success btn-lg" id="sendMessageButton">Submit</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </section>
+        
       </div>
     );
   }

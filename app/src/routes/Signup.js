@@ -134,7 +134,11 @@ class Signup extends React.Component{
 		}
 		return(
 			<MuiThemeProvider>
-			<form method = "post" action = "/api/signup">
+			<form method = "post" action = "/api/signup" className="text-center">
+				<h2 className="text-center">Sign up</h2>
+				<hr className="star-primary" />
+
+
 				<TextField 
 				name = "firstName"
 				floatingLabelText = "First name" 
