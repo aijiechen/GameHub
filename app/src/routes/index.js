@@ -8,7 +8,7 @@ import Login from './Login';
 import Profile from './Profile';
 import TicTacToe from './TicTacToe';
 import globalChat from './globalChat';
-
+import Gameroom from './gameroom';
 export default() => (
 	<BrowserRouter>
 		<Switch>
@@ -19,6 +19,8 @@ export default() => (
 			<Route path = "/profile/:id" exact component = {Profile} />
 			<Route path = "/tictactoe" exact component = {TicTacToe} />
 			<Route path = "/globalChat" exact component = {globalChat} />
+			<Route path = "/gameroom" exact component = {Gameroom} />
+			
 		</Switch>
 	</BrowserRouter>
 );

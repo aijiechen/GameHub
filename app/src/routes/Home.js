@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import './css/freelancer.css';
 
+import GlobalChat from './globalChat';
 
 import './img/portfolio/pingpong.png';
 import './img/portfolio/tic.png';
@@ -30,6 +31,7 @@ class Home extends React.Component{
 		// 		email: body.data.email,
 		// 	})
 			
+
 		// }) 
     fetch('/api/profile/' + this.state.id)
     .then(d => d.json())
@@ -151,6 +153,12 @@ class Homepage extends React.Component{
             </div>
           </div>
         </section>  
+
+        <h3 style = {{textAlign:'center'}}>Chat with players all over the world!</h3>
+        <GlobalChat/>
+        {/* login Section */}
+        <section id="about">
+
         
       </div>
     );

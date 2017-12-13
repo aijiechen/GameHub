@@ -10,6 +10,9 @@ const app = express();
 //Socket io functions
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
+
+var roomno = 1;
+var rooms = 0;
 server.listen(8000,'0.0.0.0', function(){
 	console.log('Listen to port: ' + 8000);
 });
@@ -21,6 +24,11 @@ io.on('connection', (socket) => {
 		console.log(data)
 	})
 
+    socket.on('SEND_CLICK', function(data){
+        io.emit('RECEIVE_CLICK', data)
+        console.log(data)
+    })
+    
 	socket.on('createGame', function(data){
 		socket.join('room-' + ++rooms);
 		socket.emit('newGame', {name: data.name, room: 'room-'+rooms});
@@ -48,7 +56,18 @@ io.on('connection', (socket) => {
     socket.on('gameEnded', function(data){
         socket.broadcast.to(data.room).emit('gameEnd', data);
     })
+    /*
+    //Increase roomno 2 clients are present in a room.
+   if(io.nsps['/'].adapter.rooms["room-"+roomno] && io.nsps['/'].adapter.rooms["room-"+roomno].length > 1) roomno++;
+   socket.join("room-"+roomno);
+
+   socket.leave("room-"+roomno);
+   //Send this event to everyone in the room.
+   io.sockets.in("room-"+roomno).emit('connectToRoom', "You are in room no. "+roomno);*/
 });
+
+
+
 
 
 // Access Body Data
@@ -81,6 +100,4 @@ models.sequelize.sync({force: false})
     //app.listen(PORT);
   });
 
-
-//Socketio Functions
 

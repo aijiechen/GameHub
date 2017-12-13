@@ -1,6 +1,6 @@
 import React from 'react';
 import io from 'socket.io-client';
-
+import axios from 'axios';
 class globalChat extends React.Component{
 
 	constructor(props){
@@ -27,6 +27,7 @@ class globalChat extends React.Component{
 			addMessage(data);
 		});
 
+
 		const addMessage = data => {
 			console.log(data);
 			this.setState({
@@ -36,12 +37,22 @@ class globalChat extends React.Component{
 			console.log('test this');
 		}
 	}
+	componentDidMount(props){
+		axios.get('/api/home')
+		.then(body => {
+			this.setState({
+				username: body.data.firstName
+			})
+			
+		}) 
+	}
+	
 
 	render(){
 		return(
 			<div className="container">
                 <div className="row">
-                    <div className="col-8">
+                    <div className="col-12">
                         <div className="card">
                             <div className="card-body">
                                 <div className="card-title">Global Chat</div>

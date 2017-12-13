@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import '../css/TicTacToe.css'
+import '../css/TicTacToe.css';
+import GlobalChat from './globalChat';
 import io from 'socket.io-client';
-
 /*
  * Changes from original tutorial
  *  - Here we import Component, so we can replace
@@ -21,6 +21,13 @@ function Square(props) {
   );
 }
 
+function chatBox(){
+  return(
+    <div>
+    <globalChat />
+    </div>)
+}
+
 class Board extends Component {
   
   
@@ -32,6 +39,7 @@ class Board extends Component {
   render() {
     return (
       <div>
+
         <div className="board-row">
           {this.renderSquare(0)}
           {this.renderSquare(1)}
@@ -56,55 +64,62 @@ class Game extends Component {
   constructor() {
     super();
     this.state = {
-      history: [{
-        squares: Array(9).fill(null),
-      }],
-      stepNumber: 0,
+      squares: Array(9).fill(null),
       xIsNext: true,
+      myTurn: true,
     };
   }
 
+  componentDidMount(){
+    this.socket = io('localhost:8000');
+    this.socket.on('RECEIVE_CLICK', function(data){
+      displayClick(data)
+    })
+
+
+    const displayClick = data => {
+      const squares = this.state.squares.slice();
+      const i = data.square_num;
+      /*this.setState({
+        myTurn: !this.state.myTurn
+      })*/
+      if (calculateWinner(squares) || squares[i]) {
+      return;
+      }
+      squares[i] = this.state.xIsNext ? 'X' : 'O';
+      this.setState({
+        squares: squares,
+        xIsNext: !this.state.xIsNext,
+      })
+    }
+  }
+
+
   
   handleClick(i) {
-    const history = this.state.history.slice(0, this.state.stepNumber + 1);
-    const current = history[history.length - 1];
-    const squares = current.squares.slice();
+
+    const squares = this.state.squares.slice();
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
     squares[i] = this.state.xIsNext ? 'X' : 'O';
     this.setState({
-      history: history.concat([{
+
         squares: squares,
-      }]),
-      stepNumber: history.length,
-      xIsNext: !this.state.xIsNext,
+        xIsNext: !this.state.xIsNext,
+        
     });
+
+    this.socket.emit('SEND_CLICK', {
+      square_num: i,
+      letter: squares[i],
+      nextLetter: this.state.xIsNext
+    })
   }
 
-    jumpTo(step) {
-    this.setState({
-      stepNumber: step,
-      xIsNext: (step % 2) === 0,
-    });
-  }
 
   render() {
-    const history = this.state.history;
-    const current = history[this.state.stepNumber];
-    const winner = calculateWinner(current.squares);
-
-     const moves = history.map((step, move) => {
-      const desc = move ?
-        'Move #' + move :
-        'Game start';
-      return (
-        <li key = {move}>
-          <a href="#" onClick={() => this.jumpTo(move)}>{desc}</a>
-        </li>
-      );
-    });
-
+    const winner = calculateWinner(this.state.squares);
     let status;
     if (winner) {
       status = 'Winner: ' + winner;
@@ -112,16 +127,60 @@ class Game extends Component {
       status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
     }
     return (
+      <div>
+      <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content />
+        <meta name="author" content />
+        <title>GameHub</title>
+        {/* Bootstrap core CSS */}
+        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+        {/* Custom fonts for this template */}
+        <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        {/* Custom styles for this template */}
+        <link href="./css/freelancer.min.css" rel="stylesheet" />
+        {/* Navigation */}
+        <nav className="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+          <div className="container">
+            <a className="navbar-brand js-scroll-trigger" href="/">GameHub</a>
+            <div className="collapse navbar-collapse" id="navbarResponsive">
+              <ul className="navbar-nav ml-auto">
+                <li className="nav-item">
+                  <a className="nav-link js-scroll-trigger" href="#portfolio">Game</a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link js-scroll-trigger" href="/login">Login</a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link js-scroll-trigger" href="/signup">Signup</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+      <h1>Multiplayer Tic-Tac-Toe</h1> 
+
       <div className="game">
         <div className="game-board">
+
           <Board 
-                squares={current.squares}
+                squares={this.state.squares}
                 onClick={(i) => this.handleClick(i)} />
         </div>
+
         <div className="game-info">
           <div>{status}</div>
-          <ol>{moves}</ol>
         </div>
+      </div>
+      <GlobalChat />
       </div>
     );
   }
