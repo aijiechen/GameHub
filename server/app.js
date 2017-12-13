@@ -10,6 +10,8 @@ const app = express();
 //Socket io functions
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
+
+const rooms = 0;
 server.listen(8000,'0.0.0.0', function(){
 	console.log('Listen to port: ' + 8000);
 });
@@ -20,6 +22,11 @@ io.on('connection', (socket) => {
 		io.emit('RECEIVE_MESSAGE', data)
 		console.log(data)
 	})
+
+    socket.on('SEND_CLICK', function(data){
+        io.emit('RECEIVE_CLICK', data)
+        console.log(data)
+    })
 
 	socket.on('createGame', function(data){
 		socket.join('room-' + ++rooms);
@@ -49,6 +56,9 @@ io.on('connection', (socket) => {
         socket.broadcast.to(data.room).emit('gameEnd', data);
     })
 });
+
+
+
 
 
 // Access Body Data
@@ -81,6 +91,4 @@ models.sequelize.sync({force: false})
     //app.listen(PORT);
   });
 
-
-//Socketio Functions
 
