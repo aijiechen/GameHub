@@ -90,7 +90,9 @@ class Login extends React.Component{
 		return(
 
 			<MuiThemeProvider>
-			<form>	
+			<form className="text-center">
+			<h2 className="text-center">Login</h2>
+			<hr className="star-primary" />	
 
 
 
