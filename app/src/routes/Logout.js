@@ -4,7 +4,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Route, Redirect} from 'react-router-dom';
-class Login extends React.Component{
+class Logout extends React.Component{
 
 	state = {
 			email: '',
@@ -90,11 +90,11 @@ class Login extends React.Component{
 		return(
 
 			<MuiThemeProvider>
-			<form className="text-center">
-			<h2 className="text-center">Login</h2>
-			<hr className="star-primary" />	
+			<form>	
 
-
+				<textarea>
+				You have sucessfully logged out!
+				<textarea/>
 
 				<TextField 
 				name = "email"
