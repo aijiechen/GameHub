@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import './css/freelancer.css';
 
+import GlobalChat from './globalChat';
 
 import './img/portfolio/pingpong.png';
 import './img/portfolio/tic.png';
@@ -30,17 +31,6 @@ class Home extends React.Component{
 			})
 			
 		}) 
-
-		// axios.get('/api/games')
-		// .then(body => {
-		// 	const games = body.data.map(game=>{
-		// 		return <Game data={game} key = {game.title} />;
-		// 	});
-
-		// 	this.setState({
-		// 		games: games,
-		// 	});
-		// });
 	}
 	
 	
@@ -135,6 +125,8 @@ class Homepage extends React.Component{
             </div>
           </div>
         </section>  
+        <h3 style = {{textAlign:'center'}}>Chat with players all over the world!</h3>
+        <GlobalChat/>
         {/* login Section */}
         <section id="about">
           <div className="container">
